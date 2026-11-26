@@ -1,0 +1,288 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #10251E;
+    color: #F8F0DF;
+    font-family: Georgia, serif;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 8%;
+}
+
+.logo {
+    font-size: 24px;
+    color: #D9B978;
+    font-weight: bold;
+}
+
+.nav-text {
+    color: #E9DDC7;
+    font-size: 14px;
+}
+
+.hero {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.eyebrow {
+    color: #D9B978;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 85px);
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.hero h1 span {
+    color: #D9B978;
+    font-style: italic;
+}
+
+.hero p {
+    color: #C9C1B1;
+    font-size: 17px;
+    max-width: 450px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+.main-button {
+    background: #A63C42;
+    color: white;
+    text-decoration: none;
+    padding: 17px 35px;
+    border-radius: 5px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.main-button:hover {
+    background: #C45157;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px #A63C4244;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #A99D88;
+    font-size: 12px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    max-width: 380px;
+}
+
+input {
+    padding: 17px;
+    border: 1px solid #D9B978;
+    border-radius: 5px;
+    background: #19352B;
+    color: white;
+    font-size: 15px;
+    outline: none;
+}
+
+input::placeholder {
+    color: #B5AE9E;
+}
+
+input:focus {
+    border-color: white;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-family: Georgia, serif;
+}
+
+.group-code {
+    background: #19352B;
+    border: 1px solid #D9B978;
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.group-code h2 {
+    color: #D9B978;
+    font-size: 35px;
+    letter-spacing: 5px;
+    margin: 15px 0;
+}
+
+.group-code p {
+    font-size: 13px;
+    margin: 8px 0;
+}
+
+.participants {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 40px;
+}
+
+.participants h2 {
+    color: #D9B978;
+    font-size: 25px;
+    margin-bottom: 25px;
+}
+
+.participant-list {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #19352B;
+    border: 1px solid #345344;
+    border-radius: 7px;
+    padding: 15px 18px;
+    color: #F8F0DF;
+}
+
+.remove-button {
+    background: transparent;
+    color: #D98A83;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.remove-button:hover {
+    color: white;
+}
+
+.empty-message {
+    color: #B5AE9E;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.participant-count {
+    color: #D9B978;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-top: 25px;
+}
+
+
+/* COUPLE EXCLUSION SECTION */
+
+.exclusion-section {
+    width: 100%;
+    max-width: 420px;
+    margin-top: 50px;
+    padding: 25px;
+    background: #19352B;
+    border: 1px solid #D9B978;
+    border-radius: 10px;
+}
+
+.exclusion-section h2 {
+    color: #D9B978;
+    margin-bottom: 12px;
+}
+
+.exclusion-section p {
+    color: #C9C1B1;
+    font-size: 14px;
+}
+
+.exclusion-section form {
+    margin-top: 20px;
+}
+
+.exclusion-section select {
+    width: 100%;
+    padding: 15px;
+    background: #10251E;
+    color: white;
+    border: 1px solid #D9B978;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.heart-icon {
+    text-align: center;
+    margin: 12px;
+}
+
+.exclusion-list {
+    margin-top: 30px;
+}
+
+.exclusion-list h3 {
+    color: #D9B978;
+    margin-bottom: 15px;
+}
+
+.exclusion-item {
+    padding: 14px;
+    background: #10251E;
+    border: 1px solid #345344;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: #F8F0DF;
+}
+
+
+/* SECRET SANTA DRAW */
+
+.draw-section {
+    width: 100%;
+    max-width: 420px;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+    background: #19352B;
+    border: 1px solid #D9B978;
+    border-radius: 10px;
+}
+
+.draw-section h2 {
+    color: #D9B978;
+    margin-bottom: 15px;
+}
+
+.draw-section p {
+    color: #C9C1B1;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.draw-section form {
+    margin: auto;
+}
+

@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Group | Santa's Secret</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Akshay's secret ✳</div>
+    </nav>
+
+    <section class="hero">
+
+        <div class="eyebrow">✦ YOUR GROUP IS READY ✦</div>
+
+        <h1>Welcome to<br><span>{{ group.name }}</span></h1>
+
+        <p>* Your Secret Santa group is ready. Add Names NOW!! *</p>
+
+        <div class="group-code">
+            <p>YOUR GROUP CODE</p>
+            <h2>{{ group.code }}</h2>
+            <p>Keep this code safe!</p>
+        </div>
+
+        {% if organizer_logged_in %}
+
+            <h2>✦ ORGANIZER ACCESS ✦</h2>
+
+            <div class="participants">
+
+                <h2>Who's participating?</h2>
+
+                {% if not group.drawn %}
+                    <form action="{{ url_for('group_page', group_code=group.code) }}" method="POST">
+
+                        <input
+                            type="text"
+                            name="participant_name"
+                            placeholder="Enter participant's name"
+                            required
+                        >
+
+                        <button type="submit" class="main-button">
+                            + ADD PARTICIPANT
+                        </button>
+
+                    </form>
+                {% endif %}
+
+                <div class="participant-list">
+
+                    {% for person in group.participants %}
+
+                        <div class="participant">
+
+                            <span>{{ person }}</span>
+
+                            {% if not group.drawn %}
+
+                                <form action="{{ url_for('remove_participant', group_code=group.code) }}" method="POST">
+                                    <input type="hidden" name="participant_name" value="{{ person }}">
+
+                                    <button type="submit" class="remove-button">
+                                        REMOVE
+                                    </button>
+                                </form>
+
+                            {% endif %}
+
+                        </div>
+
+                    {% else %}
+
+                        <p class="empty-message">
+                            Nobody has joined yet. Add your first participant!
+                        </p>
+
+                    {% endfor %}
+
+                </div>
+
+                <p class="participant-count">
+                    {{ group.participants|length }} PEOPLE PARTICIPATING
+                </p>
+
+                {% if not group.drawn %}
+
+                    <div class="exclusion-section">
+
+                        <h2>❤️ Couple exclusions</h2>
+
+                        <p>Make sure couples don't draw each other!</p>
+
+                        <form action="{{ url_for('add_exclusion', group_code=group.code) }}" method="POST">
+
+                            <select name="person1" required>
+                                <option value="">Choose first person</option>
+
+                                {% for person in group.participants %}
+                                    <option value="{{ person }}">{{ person }}</option>
+                                {% endfor %}
+
+                            </select>
+
+                            <div class="heart-icon">❤️</div>
+
+                            <select name="person2" required>
+                                <option value="">Choose second person</option>
+
+                                {% for person in group.participants %}
+                                    <option value="{{ person }}">{{ person }}</option>
+                                {% endfor %}
+
+                            </select>
+
+                            <button type="submit" class="main-button">
+                                ADD EXCLUSION →
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endif %}
+
+                <div class="exclusion-list">
+
+                    <h3>Protected couples</h3>
+
+                    {% for person, blocked_people in group.exclusions.items() %}
+
+                        {% for blocked in blocked_people %}
+
+                            {% if person < blocked %}
+
+                                <div class="exclusion-item">
+                                    {{ person }} ❤️ {{ blocked }}
+                                </div>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+            {% if group.drawn %}
+
+                <div class="draw-section">
+
+                    <h2>🎉 Your draw is complete!</h2>
+
+                    <p>Here are the private reveal links for your participants.</p>
+
+                    <p>
+                        Copy each person's link and send it to them privately.
+                        Make sure nobody receives someone else's link!
+                    </p>
+
+                    <div class="participant-list">
+
+                        {% for person, link in participant_links.items() %}
+
+                            <div class="participant">
+
+                                <strong>{{ person }}</strong>
+
+                                <input
+                                    type="text"
+                                    value="{{ link }}"
+                                    readonly
+                                    onclick="this.select()"
+                                    aria-label="Private reveal link for {{ person }}"
+                                >
+
+                                <button
+                                    type="button"
+                                    class="main-button"
+                                    onclick="navigator.clipboard.writeText(this.parentElement.querySelector('input').value).then(() => { this.textContent = 'COPIED!'; }).catch(() => { alert('Please select and copy the link manually.'); })"
+                                >
+                                    COPY LINK
+                                </button>
+
+                            </div>
+
+                        {% else %}
+
+                            <p class="empty-message">
+                                No participant links are available for this draw.
+                            </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            {% elif group.participants|length >= 2 %}
+
+                <div class="draw-section">
+
+                    <h2>🎁 Ready for the big reveal?</h2>
+
+                    <p>Everyone is added. The magic is almost here!</p>
+
+                    <form action="{{ url_for('draw_group', group_code=group.code) }}" method="POST">
+
+                        <button type="submit" class="main-button">
+                            DRAW SECRET SANTA →
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endif %}
+
+        {% else %}
+
+            <div class="draw-section">
+
+                <h2>🎄 Organizer access</h2>
+
+                <p>Log in with your organizer password to manage this group.</p>
+
+                <a
+                    href="{{ url_for('organizer_login', group_code=group.code) }}"
+                    class="main-button"
+                >
+                    ORGANIZER LOG IN →
+                </a>
+
+            </div>
+
+            {% if group.drawn %}
+
+                <div class="draw-section">
+
+                    <h2>🎁 The draw is complete!</h2>
+
+                    <p>
+                        Your organizer will send you your personal
+                        Secret Santa reveal link.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+    </section>
+
+</body>
+</html>

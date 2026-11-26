@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Secret Santa | Santa's Secret</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">santa's secret ✳</div>
+        <div class="nav-text">CHRISTMAS 2026</div>
+    </nav>
+
+    <section class="hero">
+
+        <div class="eyebrow">✦ YOUR SECRET SANTA REVEAL ✦</div>
+
+        <h1>It's time,<br><span>{{ participant_name }}!</span></h1>
+
+        <p>Your mission, should you choose to accept it...</p>
+
+        <div class="group-code">
+            <p>YOU ARE BUYING A GIFT FOR</p>
+
+            <h2>🎁 {{ assigned_person }}</h2>
+
+            <p>Keep it a secret, im fkn watching you.</p>
+        </div>
+
+        <p>DONT SNITCH AND BE A LOSER </p>
+
+    </section>
+</body>
+</html>

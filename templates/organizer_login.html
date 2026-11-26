@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Organizer Login | Santa's Secret</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">santa's secret ✳</div>
+        <div class="nav-text">CHRISTMAS 2026</div>
+    </nav>
+
+    <section class="hero">
+
+        <div class="eyebrow">
+            ✦ ORGANIZER ACCESS ✦
+        </div>
+
+        <h1>
+            Welcome<br>
+            <span>back.</span>
+        </h1>
+
+        <p>
+            Enter your organizer password to manage
+            {{ group.name }}.
+        </p>
+
+        <form action="{{ url_for('organizer_login', group_code=group.code) }}" method="POST">
+
+            <input
+                type="password"
+                name="organizer_password"
+                placeholder="Organizer password"
+                required
+            >
+
+            <button type="submit" class="main-button">
+                LOG IN →
+            </button>
+
+        </form>
+
+    </section>
+
+    <footer>
+        MADE WITH CHRISTMAS MAGIC ✳ © 2026
+    </footer>
+
+</body>
+</html>

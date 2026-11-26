@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Your Group | Santa's Secret</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <section class="hero">
+
+        <h1>
+            Create your<br>
+            <span>group.</span>
+        </h1>
+
+        <form action="/create" method="POST">
+
+            <input
+    type="text"
+    name="group_name"
+    placeholder="Give your group a name"
+    required
+>
+
+<input
+    type="password"
+    name="organizer_password"
+    placeholder="Create an organizer password"
+    minlength="8"
+    required
+>
+
+            <button type="submit" class="main-button">
+                CREATE GROUP →
+            </button>
+
+        </form>
+
+    </section>
+
+</body>
+</html>
